@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog Examples</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10rem;
+        background-color: #f0f0f0;
+      }
+      button {
+        margin: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .tooltip {
+        position: relative;
+        display: inline-block;
+      }
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+      }
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Modal Example -->
+    <button id="open-modal">Open Modal</button>
+    <dialog id="modal-dialog">
+      <div>This is a modal dialog.</div>
+      <button id="close-modal">Close</button>
+    </dialog>
+
+    <!-- Tooltip Example -->
+    <div class="tooltip">
+      <button id="hover-tooltip">Hover Tooltip</button>
+      <dialog id="hover-tooltip-dialog">
+        <button id="close-hover-tooltip">Close</button>
+      </dialog>
+      <span class="tooltiptext">This is a hover tooltip.</span>
+    </div>
+
+    <!-- Form Example -->
+    <button id="open-form">Open Form</button>
+    <dialog id="form-dialog">
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" /><br /><br />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" /><br /><br />
+        <button type="button" id="cancel-form">Cancel</button>
+        <button type="submit">Submit</button>
+      </form>
+    </dialog>
+
+    <script>
+      const dialog = document.querySelector("dialog");
+
+      // Close the dialog when clicking outside of it (not built-in)
+      dialog.addEventListener("click", (e) => {
+        const dialogDimensions = dialog.getBoundingClientRect();
+        if (
+          e.clientX < dialogDimensions.left ||
+          e.clientX > dialogDimensions.right ||
+          e.clientY < dialogDimensions.top ||
+          e.clientY > dialogDimensions.bottom
+        ) {
+          dialog.close();
+        }
+      });
+
+      const modalDialog = document.getElementById("modal-dialog");
+      const openModalButton = document.getElementById("open-modal");
+      const closeModalButton = document.getElementById("close-modal");
+
+      const tooltipDialog = document.getElementById("tooltip-dialog");
+      const openTooltipButton = document.getElementById("open-tooltip");
+      const closeTooltipButton = document.getElementById("close-tooltip");
+
+      const formDialog = document.getElementById("form-dialog");
+      const openFormButton = document.getElementById("open-form");
+      const cancelFormButton = document.getElementById("cancel-form");
+
+      openModalButton.addEventListener("click", () => modalDialog.showModal());
+      closeModalButton.addEventListener("click", () => modalDialog.close());
+
+      openTooltipButton.addEventListener("click", () =>
+        tooltipDialog.showModal()
+      );
+      closeTooltipButton.addEventListener("click", () => tooltipDialog.close());
+
+      openFormButton.addEventListener("click", () => formDialog.showModal());
+      cancelFormButton.addEventListener("click", () => formDialog.close());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Tag Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Template Tag Example</h2>
+
+    <template id="example-template">
+      <div>
+        <h3>This is a Template</h3>
+        <p>This template can be cloned and inserted into the document.</p>
+      </div>
+    </template>
+
+    <button onclick="cloneTemplate()">Clone Template</button>
+
+    <button onclick="cloneModifiedTemplate()">Clone Modified Template</button>
+
+    <script>
+      function cloneTemplate() {
+        // Get the template element by its ID
+        const template = document.getElementById("example-template");
+
+        // Clone the template content
+        const clone = document.importNode(template.content, true);
+
+        // Insert the cloned content into the document
+        document.body.appendChild(clone);
+      }
+
+      function cloneModifiedTemplate() {
+        // Get the template element by its ID
+        const template = document.getElementById("example-template");
+
+        // Clone the template content
+        const clone = document.importNode(template.content, true);
+
+        // Modify the cloned content
+        clone.querySelector("p").textContent = "This is a modified template.";
+
+        // Create a new <small> element
+        const smallElement = document.createElement("small");
+        smallElement.textContent = "Additional text in small";
+        smallElement.style.color = "blue";
+
+        // Append the <small> element to the cloned content
+        clone.querySelector("div").appendChild(smallElement);
+
+        // Insert the cloned content into the document
+        document.body.appendChild(clone);
+      }
+    </script>
+  </body>
+</html>

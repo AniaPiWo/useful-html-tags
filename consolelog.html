@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Styled Console Logs with Buttons</title>
+  </head>
+  <body>
+    <h2>Styled Console Logs with Buttons</h2>
+
+    <button onclick="logSuccess()">Log Success</button>
+    <button onclick="logWarning()">Log Warning</button>
+    <button onclick="logError()">Log Error</button>
+    <button onclick="logDeath()">Log Death</button>
+
+    <script>
+      // Define custom console log functions
+      function logSuccess() {
+        console.log(
+          "%c✅ Operation successful!",
+          "color: mediumspringgreen; font-weight: bold;"
+        );
+      }
+
+      function logWarning() {
+        console.log(
+          "%c⚠️ Warning: Data may be outdated.",
+          "color: orange; font-style: italic;"
+        );
+      }
+
+      function logError() {
+        console.log(
+          "%c❌ Error: Unable to load data.",
+          "color: hotpink; text-decoration: underline;"
+        );
+      }
+
+      function logDeath() {
+        console.log(
+          "%c💀 You Died.",
+          "color: black; background-color: white; font-size: 20px;"
+        );
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Picture Element Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 1rem;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Responsive Images with the Picture Element</h2>
+
+    <p>Show different images based on device pixel ratio:</p>
+    <picture>
+      <source
+        srcset="
+          https://via.placeholder.com/800x400/0000FF/FFFFFF?text=High+Resolution
+        "
+        media="(min-resolution: 2dppx)"
+      />
+      <source
+        srcset="
+          https://via.placeholder.com/400x200/FF0000/FFFFFF?text=Standard+Resolution
+        "
+      />
+      <img
+        src="https://via.placeholder.com/400x200/FF0000/FFFFFF?text=Standard+Resolution"
+        alt="Example Image"
+      />
+    </picture>
+
+    <p>Show different images based on viewport width:</p>
+    <picture>
+      <source
+        srcset="
+          https://via.placeholder.com/1200x600/00FF00/FFFFFF?text=Large+Resolution
+        "
+        media="(min-width: 800px)"
+      />
+      <source
+        srcset="
+          https://via.placeholder.com/800x400/FFFF00/000000?text=Medium+Resolution
+        "
+        media="(min-width: 400px)"
+      />
+      <source
+        srcset="
+          https://via.placeholder.com/400x200/0000FF/FFFFFF?text=Small+Resolution
+        "
+      />
+      <img
+        src="https://via.placeholder.com/400x200/0000FF/FFFFFF?text=Small+Resolution"
+        alt="Example Image"
+      />
+    </picture>
+
+    <p>Using a real WebP image:</p>
+    <picture>
+      <!-- This will be used in browsers that support WebP images -->
+      <source
+        srcset="https://www.gstatic.com/webp/gallery/1.webp"
+        type="image/webp"
+      />
+      <!-- This will be used as a fallback for browsers that do not support WebP images -->
+      <img
+        src="https://via.placeholder.com/400x200/FF0000/FFFFFF?text=Fallback+Image"
+        alt="Example WebP Image"
+      />
+    </picture>
+
+    <p>Using additional parameters in srcset:</p>
+    <picture>
+      <!--  use of additional parameters in the srcset attribute, where 2x and 1x indicate different pixel densities -->
+      <source
+        srcset="
+          https://via.placeholder.com/800x400/0000FF/FFFFFF?text=800x400 2x,
+          https://via.placeholder.com/400x200/FF0000/FFFFFF?text=400x200 1x
+        "
+      />
+      <img
+        src="https://via.placeholder.com/400x200/FF0000/FFFFFF?text=400x200"
+        alt="Example Image"
+      />
+    </picture>
+  </body>
+</html>

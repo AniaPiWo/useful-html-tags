@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Number Game</title>
+    <style>
+      /* Define custom styles for console logs */
+    </style>
+  </head>
+  <body>
+    <h2>Guess the Number Game</h2>
+
+    <p>Guess a number between 1 and 10, you have tree shots:</p>
+    <input type="number" id="guessInput" />
+    <button onclick="checkGuess()">Check Guess</button>
+
+    <script>
+      // Generate a random number between 1 and 100
+      const randomNumber = Math.floor(Math.random() * 10) + 1;
+      let attempts = 0;
+      let incorrectGuesses = 0;
+      const maxIncorrectGuesses = 3;
+
+      function checkGuess() {
+        if (incorrectGuesses >= maxIncorrectGuesses) {
+          logDeath("You've made too many incorrect guesses. Game over!");
+          disableGame();
+          return;
+        }
+
+        const guess = parseInt(document.getElementById("guessInput").value);
+        if (isNaN(guess) || guess < 1 || guess > 100) {
+          logError("Please enter a valid number between 1 and 100.");
+          return;
+        }
+
+        attempts++;
+        if (guess === randomNumber) {
+          logSuccess(
+            `Congratulations! You guessed the correct number (${randomNumber}) in ${attempts} attempts.`
+          );
+          disableGame();
+        } else if (guess < randomNumber) {
+          logWarning("Try a higher number.");
+          incorrectGuesses++;
+        } else {
+          logWarning("Try a lower number.");
+          incorrectGuesses++;
+        }
+
+        if (incorrectGuesses >= maxIncorrectGuesses) {
+          logDeath("You've made too many incorrect guesses. Game over!");
+          disableGame();
+        }
+      }
+
+      function logSuccess(message) {
+        console.log(
+          "%c✅ " + message,
+          "color: mediumspringgreen; font-weight: bold;"
+        );
+      }
+
+      function logWarning(message) {
+        console.log("%c⚠️ " + message, "color: orange; font-style: italic;");
+      }
+
+      function logError(message) {
+        console.log(
+          "%c❌ " + message,
+          "color: hotpink; text-decoration: underline;"
+        );
+      }
+
+      function logDeath(message) {
+        console.log(
+          "%c💀 " + message,
+          "color: black; background-color: white; font-size: 20px;"
+        );
+      }
+
+      function disableGame() {
+        document.getElementById("guessInput").disabled = true;
+        document.querySelector("button").disabled = true;
+      }
+    </script>
+  </body>
+</html>
